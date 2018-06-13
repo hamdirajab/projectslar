@@ -3,6 +3,11 @@
 
 @section('content')
 
+    @if(Session::has('delete_user'))
+
+        <p class="bg-danger">{{session('delete_user')}}</p>
+
+    @endif
 
     <h1>Users</h1>
    <table class="table">
@@ -29,8 +34,8 @@
                     <td>{{$user->email}}</td>
                     <td>{{$user->role->name}}</td>
                     <td>{{$user->is_Active == 1 ? 'Active' : 'Not Active'}}</td>
-                    <td>{{$user->created_at}}</td>
-                    <td>{{$user->updated_at}}</td>
+                    <td>{{$user->created_at->diffForHumans()}}</td>
+                    <td>{{$user->updated_at->diffForHumans()}}</td>
                 </tr>
             @endforeach
 
