@@ -14,23 +14,22 @@
             {!! Form::text('name',null,['class'=>'form-control']) !!}
         </div>
         <div class="form-group">
-            {!! Form::submit('Update Category',['class'=>'btn btn-primary']) !!}
+            {!! Form::submit('Update Category',['class'=>'btn btn-primary col-sm-6']) !!}
         </div>
         {!! Form::close() !!}
+
+        {!! Form::open(['method'=>'DELETE','action'=>['AdminCategoriesController@destroy' , $category->id ] ]) !!}
+        <div class="form-group">
+            {!! Form::submit('Delete Category',['class'=>'btn btn-danger col-sm-6']) !!}
+        </div>
+        {!! Form::close() !!}
+
 
     </div>
 
     <div class="col-sm-6">
-        {!! Form::open(['method'=>'','action'=>'AdminCategoriesController@destroy']) !!}
-              <div class="form-group">
-                  {!! Form::label('title','Title') !!}
-                  {!! Form::text('title',null,['class'=>'form-control']) !!}
-               </div>
-               <div class="form-group">
-                   {!! Form::submit('Create',['class'=>'btn btn-primary']) !!}
-               </div>
-        {!! Form::close() !!}
 
     </div>
+
 
 @endsection

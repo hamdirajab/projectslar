@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Category;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class AdminCategoriesController extends Controller
 {
@@ -26,6 +27,7 @@ class AdminCategoriesController extends Controller
      */
     public function create()
     {
+        return View('admin.categories.create');
     }
 
     /**
@@ -59,7 +61,9 @@ class AdminCategoriesController extends Controller
      */
     public function edit($id)
     {
-        //
+        $category = Category::findOrFail($id);
+
+        return View('admin.categories.edit',compact('category'));
     }
 
     /**
@@ -71,7 +75,9 @@ class AdminCategoriesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        Category::findOrFail($id)->update($request->all());
+
+        return redirect('admin/categories');
     }
 
     /**
@@ -82,6 +88,8 @@ class AdminCategoriesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Category::findOrFail($id)->delete();
+
+        return redirect('admin/categories');
     }
 }
