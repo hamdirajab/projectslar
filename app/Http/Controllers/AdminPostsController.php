@@ -19,7 +19,7 @@ class AdminPostsController extends Controller
      */
     public function index()
     {
-        $posts = Post::all();
+        $posts = Post::paginate(2);
 
         return View('admin.posts.index',compact('posts'));
     }
@@ -45,6 +45,8 @@ class AdminPostsController extends Controller
     public function store(PostCreateRequset $request)
     {
         $input = $request->all();
+
+//        $title = str_slug($request->title,'-'); use slug in laravel defined but with duplicated
 
         $user = Auth::user();
 
@@ -142,4 +144,17 @@ class AdminPostsController extends Controller
 
 
     }
+
+    public function post($slug){
+
+        $post = Post::findBySlugOrFail($slug);
+
+        $comments = $post->comments()->whereIsActive(1)->get();
+
+        return View('post',compact('post','comments'));
+
+    }
+
+
+
 }

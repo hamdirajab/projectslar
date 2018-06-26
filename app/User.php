@@ -48,9 +48,10 @@ class User extends Authenticatable
 //
 //    }
 
-    public function isAdmin(){
+    public function isAdmin()
+    {
 
-        if($this->role->name == 'adminstrator' && $this){
+        if($this->role->name == 'administrator' && $this){
 
             return true;
 
@@ -59,6 +60,13 @@ class User extends Authenticatable
 
     }
 
+    public function getGravatarAttribute()
+    {
+
+        $hash = md5(strtolower(trim($this->attributes['email']))) /*. "?d=mm?s=50px"*/;
+
+        return "http://www.gravatar.com/avatar/$hash";
+    }
 
 
 }
